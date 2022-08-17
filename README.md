@@ -42,20 +42,20 @@ GET /urls/:id
 PUT /urls/:id
 √ (!id)
 √   error!
-  (user)
-    (user.owns(id))
-      updates url
-      => /urls
+√ (user)
+√   (user.owns(id))
+√     updates url
+√     => /urls
 √   (!user.owns(id))
 √     error!
 √ (!user)
 √   error!
 
 DELETE /urls/:id/delete
-  (user)
-    (user.owns(id))
-      delete(id)
-      => /urls
+√ (user)
+√  (user.owns(id))
+√     delete(id)
+√     => /urls
 √   (!user.owns(id))
 √     error!
 √ (!user)
@@ -86,11 +86,11 @@ GET /register
 √   registration page
 
 POST /register
-  (!email || !password)
-    error!
-  (email.exists())
-    error!
-  create new user
+√ (!email || !password)
+√   error!
+√ (email.exists())
+√   error!
+√ create new user
 
 POST /logout
 √ deletes session
