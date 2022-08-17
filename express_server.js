@@ -130,6 +130,26 @@ app.put('/urls/:id', (request, response) => {
   }
 });
 
+app.delete('/urls/:id/delete', (request, response) => {
+  const id = request.params.id;
+  const url = dB.urls[id];
+  if (!url) {
+    response.status(404).render('error');
+    return;
+  }
+  const user = getUserByRequest(request, dB.users);
+  if (!user) {
+    response.status(400).render('error');
+    return;
+  }
+  if (!url.isOwnedBy(user)) {
+    response.status(400).render('error');
+    return;
+  }
+  delete dB.urls[id];
+  response.redirect('/urls');
+});
+
 
 // login
 app.get('/login', (request, response) => {
