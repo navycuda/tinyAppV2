@@ -18,7 +18,7 @@ const {
   generateNewKey,
   getUidByUsername,
   getUserByRequest,
-  getUidByEmail
+  getUserByEmail: getUidByEmail
 } = require('./modules/helpers');
 const { request } = require('http');
 const { response } = require('express');
@@ -143,6 +143,18 @@ app.get('/login', (request, response) => {
   const templateVars = { title: 'User Login', submitName: 'Login' };
   response.render('user_login', templateVars);
   return;
+});
+
+app.post('/login', (request, response) => {
+  const username = request.body.username;
+  const password = request.body.password;
+
+
+
+  // email
+
+  // password
+
 });
 
 // Error handling
