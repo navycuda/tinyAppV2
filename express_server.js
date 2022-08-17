@@ -36,6 +36,22 @@ app.set('view engine', 'ejs');
 /**
  * Manage End Points
  */
+// get - Root of site
+app.get('/', (request, response) => {
+
+});
+
+app.get('/urls', (request, response) => {
+
+});
+app.post('/urls', (request, response) => {
+
+});
+
+// Error handling
+app.get('*', (request, response) => {
+
+});
 
 /**
  * Start the Server
