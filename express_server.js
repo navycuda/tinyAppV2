@@ -186,6 +186,31 @@ app.delete('/logout', (request, response) => {
   response.redirect('/urls');
 });
 
+
+// Register
+app.get('/register', (request, response) => {
+  const user = getUserByRequest(request);
+  if (user) {
+    response.redirect('/urls');
+    return;
+  }
+  const templateVars = { title: 'User Registration', submitName: 'Register' };
+  response.render('user_login', templateVars);
+});
+
+app.post('/register', (request, response) => {
+  const email = request.body.email;
+  const password = request.body.password;
+  let isUser = getUserByEmail(email);
+  if (isUser || !email || !password) {
+    response.status(400).render('error');
+    return;
+  }
+  const user = new User(email, password, dB.users);
+
+
+});
+
 // Error handling
 app.get('*', (request, response) => {
   response.status(404).render('error');
