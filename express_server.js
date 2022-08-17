@@ -13,6 +13,13 @@ const cookieSession = require('cookie-session');
 const methodOverride = require('method-override');
 // Simulated Database
 const dB = require('./modules/database');
+// Helper functions
+const {
+  generateNewKey,
+  getUidByUsername,
+  getUserByRequest,
+  getUidByEmail
+} = require('./modules/helpers');
 
 /**
  * TCP:HTTP
@@ -38,11 +45,15 @@ app.set('view engine', 'ejs');
  */
 // get - Root of site
 app.get('/', (request, response) => {
+  // Get the user via session
+  // if logged in, send to /urls
+  // else, send to  /login
   response.redirect('/urls');
 });
 
 app.get('/urls', (request, response) => {
-
+  // Get the user via session
+  //  if not the user, make them login
 });
 app.post('/urls', (request, response) => {
 
