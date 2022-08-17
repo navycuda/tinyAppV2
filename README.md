@@ -13,6 +13,13 @@ GET /urls
   (!user)
     error!
 
+POST /urls
+  (user)
+    generates new short url, assigns
+      users as owner
+  (!user)
+    error!
+
 GET /urls/new
 
   (user)
@@ -25,16 +32,67 @@ GET /urls/:id
   (!id)
     error!
   (user)
-    (!user.owns(id))
-      error!
     (user.owns(id))
       edit url page
+    (!user.owns(id))
+      error!
   (!user)
     error!
 
+POST /urls/:id
+  (user)
+    (user.owns(id))
+      updates url
+      => /urls
+    (!user.owns(id))
+      error!
+  (!user)
+    error!
 
+POST /urls/:id/delete
+  (user)
+    (user.owns(id))
+      delete(id)
+      => /urls
+    (!user.owns(id))
+      error!
+  (!user)
+    error!
 
+GET /u/:id
+  (!id)
+    error!
+  (id)
+    => id.longURL
 
+GET /login
+  (user)
+    => /urls
+  (!user)
+    login page
+
+POST /login
+  (email && password)
+    set session
+  (!email || !password)
+    error!
+
+GET /register
+  (user)
+    => /urls
+  (!user)
+    registration page
+
+POST /register
+  (!email || !password)
+    error!
+  (email.exists())
+    error!
+  create new user
+
+POST /logout
+  deletes session
+  => /urls
 
 
 STRETCH
