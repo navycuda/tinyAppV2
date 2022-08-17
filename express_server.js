@@ -76,7 +76,8 @@ app.get('/urls', (request, response) => {
     response.status(400).render('error');
     return;
   }
-  response.send('get urls');
+  const urls = user.getUrls(dB.urls);
+  response.render;
 });
 
 app.post('/urls', (request, response) => {
@@ -240,6 +241,9 @@ app.post('/register', (request, response) => {
 
 // Error handling
 app.get('*', (request, response) => {
+  response.status(404).render('error');
+});
+app.post('*', (request, response) => {
   response.status(404).render('error');
 });
 
