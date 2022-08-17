@@ -45,6 +45,10 @@ class Url {
   get urlForInspection() {
     return this._url;
   }
+  /**
+   * Updates the current url to the new one provided
+   * @param {string} url updated url to replace the old one
+   */
   updateUrl(url) {
     this._url = url;
   }
