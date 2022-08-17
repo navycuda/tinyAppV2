@@ -80,10 +80,10 @@ POST /login
 √   error!
 
 GET /register
-  (user)
-    => /urls
-  (!user)
-    registration page
+√ (user)
+√   => /urls
+√ (!user)
+√   registration page
 
 POST /register
   (!email || !password)
