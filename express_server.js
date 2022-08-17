@@ -57,6 +57,10 @@ app.get('/', (request, response) => {
 // get - index of urls, accessible only to logged in user
 app.get('/urls', (request, response) => {
   const user = getUserByRequest(request, dB.users);
+  if (!user) {
+    // Create an error page... handle this error
+    
+  }  
   //  if not the user, make them login
   response.send('get urls');
 });
@@ -65,8 +69,14 @@ app.post('/urls', (request, response) => {
 });
 
 app.get('/login', (request, response) => {
-
-  response.send('get login');
+  const user = getUserByRequest(request, dB.users);
+  console.log(user);
+  if (!user) {
+    response.render('user_login');
+    return;
+  }
+  response.status(400).render('error');
+  // response.send('get login');
 });
 
 // Error handling
