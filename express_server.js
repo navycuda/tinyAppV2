@@ -11,6 +11,8 @@ const bcrypt = require('bcryptjs');
 const cookieSession = require('cookie-session');
 // Pathing middleware
 const methodOverride = require('method-override');
+// Simulated Database
+const dB = require('./modules/database');
 
 /**
  * TCP:HTTP
