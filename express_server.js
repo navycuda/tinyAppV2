@@ -33,7 +33,13 @@ app.use(methodOverride('_method'));
 // Setup the template engine, ejs
 app.set('view engine', 'ejs');
 
-dB.urls['newUrl'] = { name: 'Cummins', longURL: 'http://www.cummins.com/' };
+/**
+ * Manage End Points
+ */
 
-console.log(dB.urls);
-console.log(dB.users);
+/**
+ * Start the Server
+ */
+app.listen(PORT, () => {
+  console.log(`TinyAPP server running on port ${PORT}`);
+});
