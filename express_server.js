@@ -46,17 +46,27 @@ app.set('view engine', 'ejs');
 // get - Root of site
 app.get('/', (request, response) => {
   // Get the user via session
-  // if logged in, send to /urls
-  // else, send to  /login
+  const user = getUserByRequest(request, dB.users);
+  if (!user) {
+    response.redirect('/login');
+    return;
+  }
   response.redirect('/urls');
 });
 
+// get - index of urls, accessible only to logged in user
 app.get('/urls', (request, response) => {
-  // Get the user via session
+  const user = getUserByRequest(request, dB.users);
   //  if not the user, make them login
+  response.send('get urls');
 });
 app.post('/urls', (request, response) => {
 
+});
+
+app.get('/login', (request, response) => {
+
+  response.send('get login');
 });
 
 // Error handling
