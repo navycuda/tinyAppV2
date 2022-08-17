@@ -68,10 +68,10 @@ GET /u/:id
 √   => id.longURL
 
 GET /login
-  (user)
-    => /urls
-  (!user)
-    login page
+√ (user)
+√   => /urls
+√ (!user)
+√   login page
 
 POST /login
   (email && password)
