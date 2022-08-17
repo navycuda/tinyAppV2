@@ -19,8 +19,9 @@ const {
   getUserByRequest,
   getUserByEmail
 } = require('./modules/helpers');
-const { request } = require('http');
-const { response } = require('express');
+// Classes
+const Url = require('./modules/Url');
+const User = require('./modules/User');
 
 /**
  * TCP:HTTP
