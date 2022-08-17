@@ -16,16 +16,6 @@ const generateNewKey = (length, comparisonData) => {
   }
   return result;
 };
-// Searches database for the username and returns the
-// user id.
-const getUidByUsername = (username, database) => {
-  for (let key in database) {
-    if (database[key].username === username) {
-      return database[key].uid;
-    }
-  }
-  return null;
-};
 // Using session, gets the correct user from the database
 const getUserByRequest = (request, database) => {
   const uid = request.session.uid;
@@ -35,11 +25,16 @@ const getUserByRequest = (request, database) => {
   }
   return user;
 };
-// Searches database by email for the correct user id.
-const getUidByEmail = (email, database) => {
+/**
+ * Searches for a user by their email address
+ * @param {string} email the users email address
+ * @param {object} database the database to search
+ * @returns user || null
+ */
+const getUserByEmail = (email, database) => {
   for (let key in database) {
     if (database[key].email === email) {
-      return database[key].uid;
+      return database[key];
     }
   }
   return null;
@@ -48,7 +43,6 @@ const getUidByEmail = (email, database) => {
 /* Exports */
 module.exports = {
   generateNewKey,
-  getUidByUsername,
   getUserByRequest,
-  getUidByEmail
+  getUserByEmail: getUserByEmail
 };
