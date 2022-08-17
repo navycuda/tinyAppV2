@@ -24,6 +24,11 @@ class Url {
   isOwnedBy(user) {
     return this.owner === user.uid;
   }
+  /**
+   * Get the url for redirection and logs some details about its use
+   * @param {object} request the get request
+   * @returns {string} the long url for the website
+   */
   getUrlForRedirection(request) {
     const ip = request.headers['x-forwarded-for'] || request.connection.remoteAddress;
     if (!this.visitors[ip]) {
@@ -34,6 +39,9 @@ class Url {
     this.redirects++;
     return this._url;
   }
+  /**
+   * Getter for url without logging its use
+   */
   get urlForInspection() {
     return this._url;
   }
