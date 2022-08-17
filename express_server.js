@@ -128,6 +128,9 @@ app.put('/urls/:id', (request, response) => {
     response.status(400).render('error');
     return;
   }
+  const updatedUrl = request.body.updatedUrl;
+  url.updateUrl(updatedUrl);
+  response.redirect('/urls');
 });
 
 app.delete('/urls/:id/delete', (request, response) => {
@@ -206,9 +209,9 @@ app.post('/register', (request, response) => {
     response.status(400).render('error');
     return;
   }
-  const user = new User(email, password, dB.users);
-
-
+  const user = new User(email, dB.users);
+  user.setPassword(password);
+  response.redirect('/urls');
 });
 
 // Error handling
