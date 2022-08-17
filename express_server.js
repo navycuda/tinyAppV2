@@ -20,6 +20,8 @@ const {
   getUserByRequest,
   getUidByEmail
 } = require('./modules/helpers');
+const { request } = require('http');
+const { response } = require('express');
 
 /**
  * TCP:HTTP
@@ -66,7 +68,19 @@ app.get('/urls', (request, response) => {
   response.send('get urls');
 });
 app.post('/urls', (request, response) => {
+  const user = getUserByRequest(request, dB.users);
+  if (!user) {
+    response.status(400).render('error');
+    return;
+  }
+});
 
+app.get('/urls/new', (request, response) => {
+  const user = getUserByRequest(request, dB.users);
+  if (!user) {
+    response.status(400).render('error');
+    return;
+  }
 });
 
 app.get('/login', (request, response) => {
