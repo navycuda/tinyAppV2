@@ -62,10 +62,10 @@ DELETE /urls/:id/delete
     error!
 
 GET /u/:id
-  (!id)
-    error!
-  (id)
-    => id.longURL
+√ (!id)
+√   error!
+√ (id)
+√   => id.longURL
 
 GET /login
   (user)
