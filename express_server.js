@@ -38,7 +38,7 @@ app.set('view engine', 'ejs');
  */
 // get - Root of site
 app.get('/', (request, response) => {
-
+  response.redirect('/urls');
 });
 
 app.get('/urls', (request, response) => {
