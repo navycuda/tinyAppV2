@@ -8,10 +8,10 @@
   <%- include('partial/_header') %>
 
   <main>
-    <form method="POST" action="/login">
+    <form method="<%= method %>" action="<%= action %>">
       <h2><%= title %></h2>
-      <label for="username">Username/Email:</label>
-      <input type="text" name="username">   
+      <label for="email">Email:</label>
+      <input type="email" name="email">   
       <label for="password">Password:</label>
       <input type="password" name="password">
       <button type="submit"><%= submitName %></button>
