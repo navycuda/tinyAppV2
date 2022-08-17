@@ -74,8 +74,8 @@ GET /login
 √   login page
 
 POST /login
-  (email && password)
-    set session
+√ (email && password)
+√   set session
 √ (!email || !password)
 √   error!
 

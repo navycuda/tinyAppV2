@@ -148,12 +148,16 @@ app.post('/login', (request, response) => {
   const email = request.body.email;
   const password = request.body.password;
   const user = getUserByEmail(email, dB.users);
-
-
-  // email
-
-  // password
-
+  if (!user || !email || !password) {
+    response.status(400).render('error');
+    return;
+  }
+  if (!user.correctPassword(password)) {
+    response.status(400).render('error');
+    return;
+  }
+  request.session.uid = user.uid;
+  response.redirect('/urls');
 });
 
 // Error handling
