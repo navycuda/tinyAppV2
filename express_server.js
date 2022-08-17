@@ -85,6 +85,9 @@ app.post('/urls', (request, response) => {
     response.status(400).render('error');
     return;
   }
+  // Url adds itself to the database after construction
+  new Url(request.body.fullUrl, user.uid, dB.urls);
+  response.redirect('/urls');
 });
 
 
