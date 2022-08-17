@@ -56,7 +56,8 @@ app.get('/', (request, response) => {
   response.redirect('/urls');
 });
 
-// get - index of urls, accessible only to logged in user
+
+// urls
 app.get('/urls', (request, response) => {
   const user = getUserByRequest(request, dB.users);
   if (!user) {
@@ -67,6 +68,7 @@ app.get('/urls', (request, response) => {
   //  if not the user, make them login
   response.send('get urls');
 });
+
 app.post('/urls', (request, response) => {
   const user = getUserByRequest(request, dB.users);
   if (!user) {
@@ -75,6 +77,8 @@ app.post('/urls', (request, response) => {
   }
 });
 
+
+// urls/new
 app.get('/urls/new', (request, response) => {
   const user = getUserByRequest(request, dB.users);
   if (!user) {
@@ -83,6 +87,41 @@ app.get('/urls/new', (request, response) => {
   }
 });
 
+
+// urls/:id
+app.get('/urls/:id', (request, response) => {
+  const id = request.params.id;
+  const url = dB.urls[id];
+  if (!url) {
+    response.status(404).render('error');
+    return;
+  }
+  const user = getUserByRequest(request, dB.users);
+  if (!user) {
+    response.status(400).render('error');
+  }
+});
+
+app.put('/urls/:id', (request, response) => {
+  const id = request.params.id;
+  const url = dB.urls[id];
+  if (!url) {
+    response.status(404).render('error');
+    return;
+  }
+  const user = getUserByRequest(request, dB.users);
+  if (!user) {
+    response.status(404).render('error');
+    return;
+  }
+  if (!url.isOwnedBy(user)) {
+    response.status(400).render('error');
+    return;
+  }
+});
+
+
+// login
 app.get('/login', (request, response) => {
   const user = getUserByRequest(request, dB.users);
   console.log(user);
