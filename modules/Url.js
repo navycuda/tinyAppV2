@@ -46,3 +46,5 @@ class Url {
     return this._url;
   }
 }
+
+module.exports = Url;
