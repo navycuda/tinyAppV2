@@ -32,3 +32,8 @@ app.use(cookieSession({
 app.use(methodOverride('_method'));
 // Setup the template engine, ejs
 app.set('view engine', 'ejs');
+
+dB.urls['newUrl'] = { name: 'Cummins', longURL: 'http://www.cummins.com/' };
+
+console.log(dB.urls);
+console.log(dB.users);
