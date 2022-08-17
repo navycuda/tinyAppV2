@@ -78,6 +78,7 @@ app.get('/urls', (request, response) => {
   }
   const urls = user.getUrls(dB.urls);
   const templateVars = {
+    user,
     urls
   };
   response.render('index', templateVars);
@@ -184,7 +185,9 @@ app.get('/login', (request, response) => {
   }
   const templateVars = {
     title: 'User Login',
-    submitName: 'Login'
+    submitName: 'Login',
+    action: '/login',
+    method: 'POST'
   };
   response.render('user_login', templateVars);
   return;
@@ -193,12 +196,17 @@ app.get('/login', (request, response) => {
 app.post('/login', (request, response) => {
   const email = request.body.email;
   const password = request.body.password;
+  console.log('/login');
+  console.log('  email : ', email);
+  console.log('  password : ', password);
   const user = getUserByEmail(email, dB.users);
+  console.log('  user :', user);
   if (!user || !email || !password) {
     response.status(400).render('error');
     return;
   }
   if (!user.correctPassword(password)) {
+    console.log('  incorrect password?')
     response.status(400).render('error');
     return;
   }
@@ -209,6 +217,7 @@ app.post('/login', (request, response) => {
 
 // Logout
 app.delete('/logout', (request, response) => {
+  console.log('  > LOGOUT!');
   request.session = null;
   response.redirect('/urls');
 });
@@ -223,7 +232,9 @@ app.get('/register', (request, response) => {
   }
   const templateVars = {
     title: 'User Registration',
-    submitName: 'Register'
+    submitName: 'Register',
+    action: '/register',
+    method: 'POST'
   };
   response.render('user_login', templateVars);
 });
@@ -231,7 +242,11 @@ app.get('/register', (request, response) => {
 app.post('/register', (request, response) => {
   const email = request.body.email;
   const password = request.body.password;
+  console.log('/register');
+  console.log('  email : ', email);
+  console.log('  password : ', password);
   let isUser = getUserByEmail(email);
+  console.log(' isUser : ', isUser);
   if (isUser || !email || !password) {
     response.status(400).render('error');
     return;
@@ -239,7 +254,9 @@ app.post('/register', (request, response) => {
   const user = new User(email, dB.users);
   // setPassword adds user to the dB
   user.setPassword(password);
-  response.redirect('/urls');
+  console.log('  dB.users :');
+  console.log(dB.users);
+  response.redirect('/login');
 });
 
 // Error handling
