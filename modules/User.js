@@ -3,17 +3,33 @@ const bcrypt = require('bcryptjs');
 
 
 class User {
+  /**
+   * Creates the User object
+   * @param {string} email The users email address
+   * @param {object} database The database this user is stored in
+   */
   constructor(email, database) {
     this.uid = generateNewKey(6, database);
     this._dB = database;
     this.email = email;
   }
+  /**
+   * Checks to see if the supplied password matchs
+   * the password on record
+   * @param {string} password the form submitted password
+   * @returns {boolean} does the password match?
+   */
   correctPassword(password) {
     bcrypt.compare(password, this._password)
       .then((result) => {
         return result;
       });
   }
+  /**
+   * This method sets the password, and adds the user
+   * to the dB if they're not already part of it.
+   * @param {*} password the password to be assigned to the user
+   */
   setPassword(password) {
     bcrypt.genSalt(10)
       .then((salt) => {
