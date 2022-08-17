@@ -9,15 +9,16 @@
 
   <main>
     <form method="POST" action="/login">
+      <h2><%= title %></h2>
       <label for="username">Username/Email:</label>
       <input type="text" name="username">   
       <label for="password">Password:</label>
       <input type="password" name="password">
-      <button type="submit">Login</button>
+      <button type="submit"><%= submitName %></button>
     </form>
   </main>
 
-  <div class="flexbox-container">
+  <!-- <div class="flexbox-container">
 
     <div class="flexbox-item a">
     </div>
@@ -28,7 +29,7 @@
     <div class="flexbox-item c">
     </div>
 
-  </div>
+  </div> -->
   
 
 </body>

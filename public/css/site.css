@@ -11,14 +11,69 @@
        url('/font/special_elite/special-elite-v18-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
        url('/font/special_elite/special-elite-v18-latin-regular.svg#SpecialElite') format('svg'); /* Legacy iOS */
 }
-html {
-  font-family: 'Special Elite';
+*, html, body {
+  font-family: 'Special Elite', 'Courier New', Courier, monospace;
+}
+body {
   width: 100%;
 }
+
+main {
+  display: flex;
+  justify-content: center;
+  width: 100%
+}
+
+main form {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  background-color: aqua;
+  margin: 1rem 0 0 0;
+  padding: 1rem 1rem 1rem 1rem;
+  border-radius: 2rem;
+}
+main form h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  height: 2rem;
+  align-self: center;
+}
+
+main form label {
+  margin: 0.25rem 0 0.25rem 0;
+}
+
+main form input {
+  border: none;
+  background-color: #333;
+  color: white;
+  height: 2rem;
+  border-radius: 1rem;
+  padding: 0 1rem 0 1rem;
+}
+
+main form button {
+  font-family: 'Special Elite', 'Courier New', Courier, monospace;
+  font-size: 1.25rem;
+  border: none;
+  height: 2rem;
+  margin: 1.5rem 0 0 0;
+  border-radius: 1rem;
+  align-content: center;
+}
+main form button:hover {
+  background-color: #333;
+  color: white;
+}
+
 
 
 .flexbox-container {
   display: flex;
+  flex-wrap: wraps;
+  justify-content: space-around;
+  align-items: center;
 }
 .flexbox-item {
   width: 200px;
