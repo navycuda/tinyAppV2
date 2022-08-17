@@ -95,6 +95,11 @@ app.get('/urls/new', (request, response) => {
     response.status(400).render('error');
     return;
   }
+  const templateVars = {
+    title: 'Create Url',
+    submitName: 'Create'
+  };
+  response.render('url_edit', templateVars);
 });
 
 
@@ -109,7 +114,16 @@ app.get('/urls/:id', (request, response) => {
   const user = getUserByRequest(request, dB.users);
   if (!user) {
     response.status(400).render('error');
+    return;
   }
+  if (!url.isOwnedBy(user)) {
+    response.status(400).render('error');
+  }
+  const templateVars = {
+    title: 'Edit Url',
+    submitName: 'edit'
+  };
+  response.render('url_edit', templateVars);
 });
 
 app.put('/urls/:id', (request, response) => {
@@ -161,7 +175,10 @@ app.get('/login', (request, response) => {
     response.redirect('/urls');
     return;
   }
-  const templateVars = { title: 'User Login', submitName: 'Login' };
+  const templateVars = {
+    title: 'User Login',
+    submitName: 'Login'
+  };
   response.render('user_login', templateVars);
   return;
 });
@@ -197,7 +214,10 @@ app.get('/register', (request, response) => {
     response.redirect('/urls');
     return;
   }
-  const templateVars = { title: 'User Registration', submitName: 'Register' };
+  const templateVars = {
+    title: 'User Registration',
+    submitName: 'Register'
+  };
   response.render('user_login', templateVars);
 });
 
