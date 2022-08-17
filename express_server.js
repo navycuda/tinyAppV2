@@ -163,7 +163,7 @@ app.post('/login', (request, response) => {
 
 // Error handling
 app.get('*', (request, response) => {
-
+  response.status(404).render('error');
 });
 
 /**
