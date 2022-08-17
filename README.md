@@ -56,10 +56,10 @@ DELETE /urls/:id/delete
     (user.owns(id))
       delete(id)
       => /urls
-    (!user.owns(id))
-      error!
-  (!user)
-    error!
+√   (!user.owns(id))
+√     error!
+√ (!user)
+√   error!
 
 GET /u/:id
 √ (!id)
@@ -93,8 +93,8 @@ POST /register
   create new user
 
 POST /logout
-  deletes session
-  => /urls
+√ deletes session
+√ => /urls
 
 
 STRETCH

@@ -180,6 +180,12 @@ app.post('/login', (request, response) => {
 });
 
 
+// Logout
+app.delete('/logout', (request, response) => {
+  request.session = null;
+  response.redirect('/urls');
+});
+
 // Error handling
 app.get('*', (request, response) => {
   response.status(404).render('error');
