@@ -2,16 +2,16 @@ Route checklist
 
 GET /
 
-√  (user)  => /urls
-√  (!user) => /login 
+√ (user)  => /urls
+√ (!user) => /login 
 
 GET /urls
 
   (user)
     Index of urls
       +features
-  (!user)
-    error!
+√ (!user)
+√   error!
 
 POST /urls
   (user)

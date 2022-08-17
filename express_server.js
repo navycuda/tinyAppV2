@@ -59,8 +59,9 @@ app.get('/urls', (request, response) => {
   const user = getUserByRequest(request, dB.users);
   if (!user) {
     // Create an error page... handle this error
-    
-  }  
+    response.status(400).render('error');
+    return;
+  }
   //  if not the user, make them login
   response.send('get urls');
 });
