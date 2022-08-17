@@ -45,6 +45,9 @@ class Url {
   get urlForInspection() {
     return this._url;
   }
+  updateUrl(url) {
+    this._url = url;
+  }
 }
 
 module.exports = Url;
