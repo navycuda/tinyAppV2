@@ -1,10 +1,13 @@
 /* Require */
 const { getRandomAlphanumericString } = require('@navycuda/lotide');
 
-/* Export Functions */
-// Generates a random string with the specified length.
-// the comparison data is an object of objects, check
-// the key doesn't exist already
+/**
+ * Generates a new key, checks the database to ensure
+ * it doesn't already exist.
+ * @param {number} length the length of the keystring
+ * @param {object} comparisonData object of objects database
+ * @returns {string} random, unused key
+ */
 const generateNewKey = (length, comparisonData) => {
   let isDefined = true;
   let result;
