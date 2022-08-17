@@ -14,16 +14,16 @@ GET /urls
 √   error!
 
 POST /urls
-  (user)
-    generates new short url, assigns
-      users as owner
+√ (user)
+√   generates new short url, assigns
+√     users as owner
 √ (!user)
 √   error!
 
 GET /urls/new
 
-  (user)
-    create new url page
+√ (user)
+√   create new url page
 √ (!user)
 √   => /login
 
