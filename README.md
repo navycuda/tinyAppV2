@@ -17,15 +17,15 @@ POST /urls
   (user)
     generates new short url, assigns
       users as owner
-  (!user)
-    error!
+√ (!user)
+√   error!
 
 GET /urls/new
 
   (user)
     create new url page
-  (!user)
-    => /login
+√ (!user)
+√   => /login
 
 GET /urls/:id
 
