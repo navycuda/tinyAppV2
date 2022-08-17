@@ -99,14 +99,15 @@ app.post('/urls', (request, response) => {
 // urls/new
 app.get('/urls/new', (request, response) => {
   const user = getUserByRequest(request, dB.users);
-  if (!user) {
-    response.status(400).render('error');
-    return;
-  }
   const templateVars = {
+    user,
     title: 'Create Url',
     submitName: 'Create'
   };
+  if (!user) {
+    response.status(400).render('error', templateVars);
+    return;
+  }
   response.render('url_edit', templateVars);
 });
 
@@ -115,39 +116,41 @@ app.get('/urls/new', (request, response) => {
 app.get('/urls/:id', (request, response) => {
   const id = request.params.id;
   const url = dB.urls[id];
-  if (!url) {
-    response.status(404).render('error');
+  const user = getUserByRequest(request, dB.users);
+  const templateVars = {
+    user,
+    title: 'Edit Url',
+    submitName: 'Edit'
+  };
+  if (!user) {
+    response.status(400).render('error', templateVars);
     return;
   }
-  const user = getUserByRequest(request, dB.users);
-  if (!user) {
-    response.status(400).render('error');
+  if (!url) {
+    response.status(404).render('error', templateVars);
     return;
   }
   if (!url.isOwnedBy(user)) {
-    response.status(400).render('error');
+    response.status(400).render('error', templateVars);
   }
-  const templateVars = {
-    title: 'Edit Url',
-    submitName: 'edit'
-  };
   response.render('url_edit', templateVars);
 });
 
 app.put('/urls/:id', (request, response) => {
   const id = request.params.id;
   const url = dB.urls[id];
-  if (!url) {
-    response.status(404).render('error');
+  const user = getUserByRequest(request, dB.users);
+  const templateVars = { user };
+  if (!user) {
+    response.status(404).render('error', templateVars);
     return;
   }
-  const user = getUserByRequest(request, dB.users);
-  if (!user) {
-    response.status(404).render('error');
+  if (!url) {
+    response.status(404).render('error', templateVars);
     return;
   }
   if (!url.isOwnedBy(user)) {
-    response.status(400).render('error');
+    response.status(400).render('error', templateVars);
     return;
   }
   const updatedUrl = request.body.updatedUrl;
@@ -158,17 +161,18 @@ app.put('/urls/:id', (request, response) => {
 app.delete('/urls/:id/delete', (request, response) => {
   const id = request.params.id;
   const url = dB.urls[id];
-  if (!url) {
-    response.status(404).render('error');
+  const user = getUserByRequest(request, dB.users);
+  const templateVars = { user };
+  if (!user) {
+    response.status(400).render('error', templateVars);
     return;
   }
-  const user = getUserByRequest(request, dB.users);
-  if (!user) {
-    response.status(400).render('error');
+  if (!url) {
+    response.status(404).render('error', templateVars);
     return;
   }
   if (!url.isOwnedBy(user)) {
-    response.status(400).render('error');
+    response.status(400).render('error', templateVars);
     return;
   }
   delete dB.urls[id];
@@ -184,6 +188,7 @@ app.get('/login', (request, response) => {
     return;
   }
   const templateVars = {
+    user,
     title: 'User Login',
     submitName: 'Login',
     action: '/login',
@@ -205,13 +210,14 @@ app.post('/login', (request, response) => {
     response.status(400).render('error');
     return;
   }
-  if (!user.correctPassword(password)) {
-    console.log('  incorrect password?')
-    response.status(400).render('error');
-    return;
-  }
-  request.session.uid = user.uid;
-  response.redirect('/urls');
+  user.correctPassword(password, (isValid) => {
+    if (!isValid) {
+      response.status(400).render('error');
+      return;
+    }
+    request.session.uid = user.uid;
+    response.redirect('/urls');
+  });
 });
 
 
@@ -231,6 +237,7 @@ app.get('/register', (request, response) => {
     return;
   }
   const templateVars = {
+    user: null,
     title: 'User Registration',
     submitName: 'Register',
     action: '/register',
