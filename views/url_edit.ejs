@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('partial/_head') %>
+    <title>TinyApp : Login</title>
+  </head>
+<body>
+  <%- include('partial/_header') %>
+
+  <main>
+    <form method="POST" action="/login">
+      <h2><%= title %></h2>
+      <label for="username">Username/Email:</label>
+      <input type="text" name="username">   
+      <label for="password">Password:</label>
+      <input type="password" name="password">
+      <button type="submit"><%= submitName %></button>
+    </form>
+  </main>
+
+  
+</body>
+</html>
