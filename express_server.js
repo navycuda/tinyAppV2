@@ -57,6 +57,18 @@ app.get('/', (request, response) => {
 });
 
 
+// u/:id
+app.get('/u/:id', (request, response) => {
+  const id = request.params.id;
+  const url = dB.urls[id];
+  if (!url) {
+    response.status(404).render('error');
+    return;
+  }
+  response.redirect(url.getUrlForRedirection(request));
+});
+
+
 // urls
 app.get('/urls', (request, response) => {
   const user = getUserByRequest(request, dB.users);
@@ -124,14 +136,13 @@ app.put('/urls/:id', (request, response) => {
 // login
 app.get('/login', (request, response) => {
   const user = getUserByRequest(request, dB.users);
-  console.log(user);
-  if (!user) {
-    const templateVars = { title: 'User Login', submitName: 'Login' };
-    response.render('user_login', templateVars);
+  if (user) {
+    response.redirect('/urls');
     return;
   }
-  response.status(400).render('error');
-  // response.send('get login');
+  const templateVars = { title: 'User Login', submitName: 'Login' };
+  response.render('user_login', templateVars);
+  return;
 });
 
 // Error handling
