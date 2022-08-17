@@ -77,7 +77,10 @@ app.get('/urls', (request, response) => {
     return;
   }
   const urls = user.getUrls(dB.urls);
-  response.render;
+  const templateVars = {
+    urls
+  };
+  response.render('index', templateVars);
 });
 
 app.post('/urls', (request, response) => {
