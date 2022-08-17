@@ -13,26 +13,25 @@
 }
 html {
   font-family: 'Special Elite';
+  width: 100%;
 }
-header {
+
+
+.flexbox-container {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  height: 3em;
-  background-color: aquamarine;
 }
-header h1 {
-  font-size: 32px;
-  font-weight: bold;
+.flexbox-item {
+  width: 200px;
+  margin: 10px;
+  border: 3px solid #333;
+  background-color: #dfdfdf;
 }
-header div {
-  display:flex;
-  flex-direction: row;
-  align-self: flex-end;
-  justify-content: flex-end;
-  padding: 0 1rem 0 1rem;
+.flexbox-item.a {
+  min-height: 100px;
 }
-header div a {
-  align-self: flex-end;
-  padding: 0 0.2rem 0 0.2rem;
+.flexbox-item.b {
+  min-height: 200px;
+}
+.flexbox-item.c {
+  min-height:300px;
 }
