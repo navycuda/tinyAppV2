@@ -31,12 +31,12 @@ class Url {
    */
   getUrlForRedirection(request) {
     const ip = request.headers['x-forwarded-for'] || request.connection.remoteAddress;
+    this.redirects++;
     if (!this.visitors[ip]) {
       this.visitors[ip] = 1;
-    } else {
-      this.visitors[ip]++;
+      return this._url;
     }
-    this.redirects++;
+    this.visitors[ip]++;
     return this._url;
   }
   /**
