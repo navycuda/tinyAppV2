@@ -1,0 +1,22 @@
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 3em;
+  background-color: aquamarine;
+}
+header h1 {
+  font-size: 32px;
+  font-weight: bold;
+}
+header div {
+  display:flex;
+  flex-direction: row;
+  align-self: flex-end;
+  justify-content: flex-end;
+  padding: 0 1rem 0 1rem;
+}
+header div a {
+  align-self: flex-end;
+  padding: 0 0.2rem 0 0.2rem;
+}

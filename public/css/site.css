@@ -1,0 +1,38 @@
+/* special-elite-regular - latin */
+@font-face {
+  font-family: 'Special Elite';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/font/special_elite/special-elite-v18-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local(''),
+       url('/font/special_elite/special-elite-v18-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/font/special_elite/special-elite-v18-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('/font/special_elite/special-elite-v18-latin-regular.woff') format('woff'), /* Modern Browsers */
+       url('/font/special_elite/special-elite-v18-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('/font/special_elite/special-elite-v18-latin-regular.svg#SpecialElite') format('svg'); /* Legacy iOS */
+}
+html {
+  font-family: 'Special Elite';
+}
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 3em;
+  background-color: aquamarine;
+}
+header h1 {
+  font-size: 32px;
+  font-weight: bold;
+}
+header div {
+  display:flex;
+  flex-direction: row;
+  align-self: flex-end;
+  justify-content: flex-end;
+  padding: 0 1rem 0 1rem;
+}
+header div a {
+  align-self: flex-end;
+  padding: 0 0.2rem 0 0.2rem;
+}
