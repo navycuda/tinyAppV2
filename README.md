@@ -76,8 +76,8 @@ GET /login
 POST /login
   (email && password)
     set session
-  (!email || !password)
-    error!
+√ (!email || !password)
+√   error!
 
 GET /register
   (user)
