@@ -28,14 +28,13 @@ GET /urls/new
 √   => /login
 
 GET /urls/:id
-
 √ (!id)
 √   error!
-  (user)
-    (user.owns(id))
-      edit url page
-    (!user.owns(id))
-      error!
+√ (user)
+√   (user.owns(id))
+√     edit url page
+√   (!user.owns(id))
+√     error!
 √ (!user)
 √   error!
 
