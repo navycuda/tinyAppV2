@@ -7,9 +7,9 @@ GET /
 
 GET /urls
 
-  (user)
-    Index of urls
-      +features
+√ (user)
+√   Index of urls
+√     +features
 √ (!user)
 √   error!
 
