@@ -42,6 +42,16 @@ class User {
         }
       });
   }
+  getUrls(urlDatabase) {
+    const result = {};
+    for (const key in urlDatabase) {
+      const url = urlDatabase[key];
+      if (url.isOwnedBy(this)) {
+        result[url.id] = url;
+      }
+    }
+    return result;
+  }
 }
 
 module.exports = User;
