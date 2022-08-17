@@ -29,27 +29,29 @@ GET /urls/new
 
 GET /urls/:id
 
-  (!id)
-    error!
+√ (!id)
+√   error!
   (user)
     (user.owns(id))
       edit url page
     (!user.owns(id))
       error!
-  (!user)
-    error!
+√ (!user)
+√   error!
 
-POST /urls/:id
+PUT /urls/:id
+√ (!id)
+√   error!
   (user)
     (user.owns(id))
       updates url
       => /urls
-    (!user.owns(id))
-      error!
-  (!user)
-    error!
+√   (!user.owns(id))
+√     error!
+√ (!user)
+√   error!
 
-POST /urls/:id/delete
+DELETE /urls/:id/delete
   (user)
     (user.owns(id))
       delete(id)
