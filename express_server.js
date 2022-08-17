@@ -72,7 +72,8 @@ app.get('/login', (request, response) => {
   const user = getUserByRequest(request, dB.users);
   console.log(user);
   if (!user) {
-    response.render('user_login');
+    const templateVars = { title: 'User Login', submitName: 'Login' };
+    response.render('user_login', templateVars);
     return;
   }
   response.status(400).render('error');
