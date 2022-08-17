@@ -16,9 +16,8 @@ const dB = require('./modules/database');
 // Helper functions
 const {
   generateNewKey,
-  getUidByUsername,
   getUserByRequest,
-  getUserByEmail: getUidByEmail
+  getUserByEmail
 } = require('./modules/helpers');
 const { request } = require('http');
 const { response } = require('express');
@@ -146,9 +145,9 @@ app.get('/login', (request, response) => {
 });
 
 app.post('/login', (request, response) => {
-  const username = request.body.username;
+  const email = request.body.email;
   const password = request.body.password;
-
+  const user = getUserByEmail(email, dB.users);
 
 
   // email
