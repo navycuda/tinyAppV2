@@ -73,11 +73,9 @@ app.get('/u/:id', (request, response) => {
 app.get('/urls', (request, response) => {
   const user = getUserByRequest(request, dB.users);
   if (!user) {
-    // Create an error page... handle this error
     response.status(400).render('error');
     return;
   }
-  //  if not the user, make them login
   response.send('get urls');
 });
 
@@ -160,6 +158,7 @@ app.post('/login', (request, response) => {
   request.session.uid = user.uid;
   response.redirect('/urls');
 });
+
 
 // Error handling
 app.get('*', (request, response) => {
