@@ -19,10 +19,10 @@ class User {
    * @param {string} password the form submitted password
    * @returns {boolean} does the password match?
    */
-  correctPassword(password) {
+  correctPassword(password, callback) {
     bcrypt.compare(password, this._password)
       .then((result) => {
-        return result;
+        callback(result);
       });
   }
   /**
