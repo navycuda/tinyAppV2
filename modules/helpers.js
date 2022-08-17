@@ -47,5 +47,5 @@ const getUserByEmail = (email, database) => {
 module.exports = {
   generateNewKey,
   getUserByRequest,
-  getUserByEmail: getUserByEmail
+  getUserByEmail
 };
