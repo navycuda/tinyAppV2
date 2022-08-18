@@ -7,10 +7,16 @@
     <% } %>
   </div>
   <div>
-    <a href="/login">Login</a>
-    <a href="/register">Register</a>
-    <form method="POST" action="/logout?_method=DELETE">
-      <button type="submit">logout</button>
-    </form>
+    <% if (user) { %>
+      <span>
+        <%= user.email %> logged in
+      </span>
+      <form method="POST" action="/logout?_method=DELETE">
+        <button type="submit">logout</button>
+      </form>
+    <% } else { %>
+      <a href="/login">Login</a>
+      <a href="/register">Register</a>
+    <% } %>
   </div>
 </header>
