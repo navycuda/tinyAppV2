@@ -9,6 +9,7 @@
 
 
   <section class="container">
+
     <div class="row">
       
       <div class="cell shortUrl">
@@ -45,6 +46,7 @@
 
     
     <% for (const key in urls) { %>
+
       <div class="row">
         
         <div class="cell shortUrl">
@@ -67,25 +69,20 @@
         </div>
 
         <div class="cell edit">
-            <form method="GET" action="/url/<%= urls[key].id %>">
+            <form method="GET" action="/urls/<%= urls[key].id %>">
               <button type="submit">
                 Edit
               </button>
             </form>
-            <form method="POST" action="/url/<%= urls[key].id %>/Delete?_method=DELETE">
+            <form method="POST" action="/urls/<%= urls[key].id %>/delete?_method=DELETE">
               <button type="submit">
                 Delete
               </button>
             </form>
         </div>
-
       </div>
 
-    
-      
-      
     <% } %>
-      
       
   </section>
 </body>
