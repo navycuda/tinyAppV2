@@ -1,0 +1,31 @@
+.error-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.error-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0 1rem 0;
+  padding: 1rem 1rem 1rem 1rem;
+  background-color: #ff0000;
+  color: white;
+  width: 50%;
+  border-radius: 1rem;
+}
+.error-item {
+  width: 300px;
+  text-align: center;
+}
+h1.error-item {
+  font-size: 1.25rem;
+}
+a.error-item {
+  color: white;
+  margin: 0.25rem 0 0 0;
+}
+a.error-item:hover {
+  color:antiquewhite;
+}
