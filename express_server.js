@@ -122,7 +122,9 @@ app.get('/urls/:id', (request, response) => {
   const templateVars = {
     user,
     title: 'Edit Url',
-    submitName: 'Edit'
+    submitName: 'Edit',
+    method: 'POST',
+    action: `/urls/${id}?_method=PUT`
   };
   if (!user) {
     response.status(400).render('error', templateVars);
@@ -140,6 +142,7 @@ app.get('/urls/:id', (request, response) => {
 
 app.put('/urls/:id', (request, response) => {
   const id = request.params.id;
+  console.log('PUT - /urls/:id', id);
   const url = dB.urls[id];
   const user = getUserByRequest(request, dB.users);
   const templateVars = { user };
@@ -155,7 +158,8 @@ app.put('/urls/:id', (request, response) => {
     response.status(400).render('error', templateVars);
     return;
   }
-  const updatedUrl = request.body.updatedUrl;
+  const updatedUrl = request.body.fullUrl;
+  console.log(updatedUrl);
   url.updateUrl(updatedUrl);
   response.redirect('/urls');
 });
