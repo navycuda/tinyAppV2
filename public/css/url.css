@@ -1,24 +1,33 @@
 .container {
-
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 1.5rem 0 0 0;
+  align-items: center;
 }
 .container .row {
-
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  background-color: aquamarine;
 }
-.container .cell {
-
+.container .cell h3 {
+  font-size: 1.1rem;
+  font-weight: bolder;
+  text-decoration: underline;
 }
 .container .cell.shortUrl {
-
+  width: 15%;
 }
 .container .cell.fullUrl {
-
+  width: 40%;
 }
 .container .cell.redirects {
-
+  width: 15%;
 }
 .container .cell.users {
-
+  width: 10%;
 }
 .container .cell.edit {
-  
+  width: 10%
 }
