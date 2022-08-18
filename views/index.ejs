@@ -7,6 +7,11 @@
 <body>
   <%- include('partial/_header') %>
 
+  <%= urls %>
+
+  <% for (const key in urls) { %>
+    <h1><%= key %></h1>
+  <% } %>
   
 </body>
 </html>
