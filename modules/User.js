@@ -30,7 +30,7 @@ class User {
    * to the dB if they're not already part of it.
    * @param {*} password the password to be assigned to the user
    */
-  setPassword(password) {
+  setPassword(password, callback) {
     bcrypt.genSalt(10)
       .then((salt) => {
         return bcrypt.hash(password, salt);
@@ -40,6 +40,7 @@ class User {
         if (!this._dB[this.uid]) {
           this._dB[this.uid] = this;
         }
+        callback();
       });
   }
   getUrls(urlDatabase) {
