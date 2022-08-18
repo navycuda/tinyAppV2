@@ -101,7 +101,9 @@ app.get('/urls/new', (request, response) => {
   const templateVars = {
     user,
     title: 'Create Url',
-    submitName: 'Create'
+    submitName: 'Create',
+    action: '/urls',
+    method: 'POST'
   };
   if (!user) {
     response.status(400).render('error', templateVars);

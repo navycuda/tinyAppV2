@@ -8,7 +8,7 @@
   <%- include('partial/_header') %>
 
   <main>
-    <form method="POST" action="/login">
+    <form method="<%= method %>>" action="<%= action %>">
       <h2><%= title %></h2>
       <label for="fullUrl">Full Url</label>
       <input type="text" name="fullUrl">   
