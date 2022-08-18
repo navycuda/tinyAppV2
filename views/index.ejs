@@ -8,13 +8,51 @@
   <%- include('partial/_header') %>
 
 
+  <section class="container">
+    <div class="row">
+      
+      <div class="cell shortUrl">
+        <h3>
+          Short Url
+        </h3>
+      </div>
 
-  
+      <div class="cell fullUrl">
+        <h3>
+          Full Url
+        </h3>
+      </div>
+
+      <div class="cell redirects">
+        <h3>
+          Redirects
+        </h3>
+      </div>
+
+      <div class="cell users">
+        <h3>
+          Users
+        </h3>
+      </div>
+
+      <div class="edit">
+        <h3>
+          Edit/Delete
+        </h3>
+      </div>
+
+    </div>
+
+
+
+
     
-
-  <% for (const key in urls) { %>
-    <h1><%= key %></h1>
-  <% } %>
-  
+    <% for (const key in urls) { %>
+      
+      
+    <% } %>
+      
+      
+  </section>
 </body>
 </html>
