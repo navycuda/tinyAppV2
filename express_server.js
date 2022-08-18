@@ -72,22 +72,21 @@ app.get('/u/:id', (request, response) => {
 // urls
 app.get('/urls', (request, response) => {
   const user = getUserByRequest(request, dB.users);
+  const templateVars = { user };
   if (!user) {
-    response.status(400).render('error');
+    response.status(400).render('error', templateVars);
     return;
   }
   const urls = user.getUrls(dB.urls);
-  const templateVars = {
-    user,
-    urls
-  };
+  templateVars.urls = urls;
   response.render('index', templateVars);
 });
 
 app.post('/urls', (request, response) => {
   const user = getUserByRequest(request, dB.users);
+  const templateVars = { user };
   if (!user) {
-    response.status(400).render('error');
+    response.status(400).render('error', templateVars);
     return;
   }
   // Url adds itself to the database after construction
@@ -205,14 +204,16 @@ app.post('/login', (request, response) => {
   console.log('  email : ', email);
   console.log('  password : ', password);
   const user = getUserByEmail(email, dB.users);
+  const templateVars = { user };
   console.log('  user :', user);
   if (!user || !email || !password) {
-    response.status(400).render('error');
+    response.status(400).render('error', templateVars);
     return;
   }
   user.correctPassword(password, (isValid) => {
     if (!isValid) {
-      response.status(400).render('error');
+      templateVars.user = null;
+      response.status(400).render('error', templateVars);
       return;
     }
     request.session.uid = user.uid;
@@ -231,7 +232,7 @@ app.delete('/logout', (request, response) => {
 
 // Register
 app.get('/register', (request, response) => {
-  const user = getUserByRequest(request);
+  const user = getUserByRequest(request, dB.users);
   if (user) {
     response.redirect('/urls');
     return;
@@ -260,10 +261,9 @@ app.post('/register', (request, response) => {
   }
   const user = new User(email, dB.users);
   // setPassword adds user to the dB
-  user.setPassword(password);
-  console.log('  dB.users :');
-  console.log(dB.users);
-  response.redirect('/login');
+  user.setPassword(password, () => {
+    response.redirect('/login');
+  });
 });
 
 // Error handling
