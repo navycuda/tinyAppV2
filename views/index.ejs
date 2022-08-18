@@ -35,7 +35,7 @@
         </h3>
       </div>
 
-      <div class="edit">
+      <div class="cell edit">
         <h3>
           Edit/Delete
         </h3>
@@ -43,11 +43,43 @@
 
     </div>
 
-
-
-
     
     <% for (const key in urls) { %>
+      <div class="row">
+        
+        <div class="cell shortUrl">
+          <%= urls[key].id %>
+        </div>
+        
+        <div class="cell fullUrl">
+          <%= urls[key].urlForInspection %>
+        </div>
+
+        <div class="cell redirects">
+          <%= urls[key].redirects %>
+
+        </div>
+
+        <div class="cell users">
+          <%= urls[key].uniqueVisitors %>
+        </div>
+
+        <div class="cell edit">
+            <form method="GET" action="/url/<%= urls[key].id %>">
+              <button type="submit">
+                Edit
+              </button>
+            </form>
+            <form method="POST" action="/url/<%= urls[key].id %>/Delete?_method=DELETE">
+              <button type="submit">
+                Delete
+              </button>
+            </form>
+        </div>
+
+      </div>
+
+    
       
       
     <% } %>
