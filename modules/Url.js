@@ -53,6 +53,9 @@ class Url {
   updateUrl(url) {
     this._url = url;
   }
+  get uniqueVisitors() {
+    return Object.keys(this.visitors).length;
+  }
 }
 
 module.exports = Url;
