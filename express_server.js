@@ -260,10 +260,10 @@ app.post('/register', (request, response) => {
   console.log('/register');
   console.log('  email : ', email);
   console.log('  password : ', password);
-  let isUser = getUserByEmail(email);
+  let isUser = getUserByEmail(email, dB.users);
   console.log(' isUser : ', isUser);
   if (isUser || !email || !password) {
-    response.status(400).render('error');
+    response.status(400).render('error', { user: null });
     return;
   }
   const user = new User(email, dB.users);
