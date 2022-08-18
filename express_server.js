@@ -62,7 +62,7 @@ app.get('/u/:id', (request, response) => {
   const id = request.params.id;
   const url = dB.urls[id];
   if (!url) {
-    response.status(404).render('error');
+    response.status(404).render('error', { user: null });
     return;
   }
   response.redirect(url.getUrlForRedirection(request));
@@ -84,6 +84,7 @@ app.get('/urls', (request, response) => {
 
 app.post('/urls', (request, response) => {
   const user = getUserByRequest(request, dB.users);
+  console.log(request.body.fullUrl);
   const templateVars = { user };
   if (!user) {
     response.status(400).render('error', templateVars);
