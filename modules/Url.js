@@ -15,7 +15,7 @@ class Url {
     this.createdAt = Date.now();
     this.visitors = {};
     this.redirects = 0;
-    console.log(this);
+    database[this.id] = this;
   }
   /**
    * Tests to see if the user owns this url or not.
