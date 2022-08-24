@@ -133,7 +133,7 @@ app.get('/urls/:id', (request, response) => {
     submitName: 'Edit',
     method: 'POST',
     action: `/urls/${id}?_method=PUT`,
-    fullUrl: url.getUrlForInspection
+    fullUrl: url.urlForInspection
   };
   if (!user) {
     templateVars.errorMsg = 'Not logged in';
