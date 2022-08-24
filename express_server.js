@@ -110,7 +110,8 @@ app.get('/urls/new', (request, response) => {
     title: 'Create Url',
     submitName: 'Create',
     action: '/urls',
-    method: 'POST'
+    method: 'POST',
+    fullUrl: ''
   };
   if (!user) {
     templateVars.errorMsg = 'Not logged in';
@@ -131,7 +132,8 @@ app.get('/urls/:id', (request, response) => {
     title: 'Edit Url',
     submitName: 'Edit',
     method: 'POST',
-    action: `/urls/${id}?_method=PUT`
+    action: `/urls/${id}?_method=PUT`,
+    fullUrl: url.getUrlForInspection
   };
   if (!user) {
     templateVars.errorMsg = 'Not logged in';
