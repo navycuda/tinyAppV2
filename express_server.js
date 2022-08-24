@@ -280,7 +280,8 @@ app.post('/register', (request, response) => {
   const user = new User(email, dB.users);
   // setPassword adds user to the dB
   user.setPassword(password, () => {
-    response.redirect('/login');
+    request.session.uid = user.uid;
+    response.redirect('/urls');
   });
 });
 
