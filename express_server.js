@@ -211,7 +211,10 @@ app.post('/login', (request, response) => {
   console.log('  email : ', email);
   console.log('  password : ', password);
   const user = getUserByEmail(email, dB.users);
-  const templateVars = { user };
+  const templateVars = {
+    user,
+    errorMsg: 'Error Loging in, username or password incorrect.'
+  };
   console.log('  user :', user);
   if (!user || !email || !password) {
     response.status(400).render('error', templateVars);
@@ -263,7 +266,11 @@ app.post('/register', (request, response) => {
   let isUser = getUserByEmail(email, dB.users);
   console.log(' isUser : ', isUser);
   if (isUser || !email || !password) {
-    response.status(400).render('error', { user: null });
+    const templateVars = {
+      user: null,
+      errorMsg: 'Registration error, please try again.'
+    };
+    response.status(400).render('error', templateVars);
     return;
   }
   const user = new User(email, dB.users);
