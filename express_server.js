@@ -84,7 +84,6 @@ app.get('/urls', (request, response) => {
 
 app.post('/urls', (request, response) => {
   const user = getUserByRequest(request, dB.users);
-  console.log(request.body.fullUrl);
   const templateVars = { user };
   if (!user) {
     response.status(400).render('error', templateVars);
@@ -142,7 +141,6 @@ app.get('/urls/:id', (request, response) => {
 
 app.put('/urls/:id', (request, response) => {
   const id = request.params.id;
-  console.log('PUT - /urls/:id', id);
   const url = dB.urls[id];
   const user = getUserByRequest(request, dB.users);
   const templateVars = { user };
@@ -159,7 +157,6 @@ app.put('/urls/:id', (request, response) => {
     return;
   }
   const updatedUrl = request.body.fullUrl;
-  console.log(updatedUrl);
   url.updateUrl(updatedUrl);
   response.redirect('/urls');
 });
@@ -207,15 +204,11 @@ app.get('/login', (request, response) => {
 app.post('/login', (request, response) => {
   const email = request.body.email;
   const password = request.body.password;
-  console.log('/login');
-  console.log('  email : ', email);
-  console.log('  password : ', password);
   const user = getUserByEmail(email, dB.users);
   const templateVars = {
     user,
     errorMsg: 'Error Loging in, username or password incorrect.'
   };
-  console.log('  user :', user);
   if (!user || !email || !password) {
     response.status(400).render('error', templateVars);
     return;
@@ -234,7 +227,6 @@ app.post('/login', (request, response) => {
 
 // Logout
 app.delete('/logout', (request, response) => {
-  console.log('  > LOGOUT!');
   request.session = null;
   response.redirect('/urls');
 });
@@ -260,11 +252,7 @@ app.get('/register', (request, response) => {
 app.post('/register', (request, response) => {
   const email = request.body.email;
   const password = request.body.password;
-  console.log('/register');
-  console.log('  email : ', email);
-  console.log('  password : ', password);
   let isUser = getUserByEmail(email, dB.users);
-  console.log(' isUser : ', isUser);
   if (isUser || !email || !password) {
     const templateVars = {
       user: null,
