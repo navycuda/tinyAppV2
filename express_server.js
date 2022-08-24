@@ -62,7 +62,11 @@ app.get('/u/:id', (request, response) => {
   const id = request.params.id;
   const url = dB.urls[id];
   if (!url) {
-    response.status(404).render('error', { user: null });
+    const templateVars = {
+      user: null,
+      errorMsg: 'url does not exist'
+    };
+    response.status(404).render('error', templateVars);
     return;
   }
   response.redirect(url.getUrlForRedirection(request));
@@ -74,6 +78,7 @@ app.get('/urls', (request, response) => {
   const user = getUserByRequest(request, dB.users);
   const templateVars = { user };
   if (!user) {
+    templateVars.errorMsg = 'Not logged in';
     response.status(400).render('error', templateVars);
     return;
   }
@@ -86,6 +91,7 @@ app.post('/urls', (request, response) => {
   const user = getUserByRequest(request, dB.users);
   const templateVars = { user };
   if (!user) {
+    templateVars.errorMsg = 'Not logged in';
     response.status(400).render('error', templateVars);
     return;
   }
@@ -106,6 +112,7 @@ app.get('/urls/new', (request, response) => {
     method: 'POST'
   };
   if (!user) {
+    templateVars.errorMsg = 'Not logged in';
     response.status(400).render('error', templateVars);
     return;
   }
@@ -126,14 +133,17 @@ app.get('/urls/:id', (request, response) => {
     action: `/urls/${id}?_method=PUT`
   };
   if (!user) {
+    templateVars.errorMsg = 'Not logged in';
     response.status(400).render('error', templateVars);
     return;
   }
   if (!url) {
+    templateVars.errorMsg = 'Url does not exist';
     response.status(404).render('error', templateVars);
     return;
   }
   if (!url.isOwnedBy(user)) {
+    templateVars.errorMsg = 'Not owner of this url.';
     response.status(400).render('error', templateVars);
   }
   response.render('url_edit', templateVars);
@@ -145,14 +155,17 @@ app.put('/urls/:id', (request, response) => {
   const user = getUserByRequest(request, dB.users);
   const templateVars = { user };
   if (!user) {
-    response.status(404).render('error', templateVars);
+    templateVars.errorMsg = "Not logged in.";
+    response.status(400).render('error', templateVars);
     return;
   }
   if (!url) {
+    templateVars.errorMsg = "Url does not exist";
     response.status(404).render('error', templateVars);
     return;
   }
   if (!url.isOwnedBy(user)) {
+    templateVars.errorMsg = 'Not owner of this url.';
     response.status(400).render('error', templateVars);
     return;
   }
@@ -167,14 +180,17 @@ app.delete('/urls/:id/delete', (request, response) => {
   const user = getUserByRequest(request, dB.users);
   const templateVars = { user };
   if (!user) {
+    templateVars.errorMsg = "Not logged in.";
     response.status(400).render('error', templateVars);
     return;
   }
   if (!url) {
+    templateVars.errorMsg = "Url does not exist";
     response.status(404).render('error', templateVars);
     return;
   }
   if (!url.isOwnedBy(user)) {
+    templateVars.errorMsg = 'Not owner of this url.';
     response.status(400).render('error', templateVars);
     return;
   }
@@ -207,7 +223,7 @@ app.post('/login', (request, response) => {
   const user = getUserByEmail(email, dB.users);
   const templateVars = {
     user,
-    errorMsg: 'Error Loging in, username or password incorrect.'
+    errorMsg: 'Error Logging in, username or password incorrect.'
   };
   if (!user || !email || !password) {
     response.status(400).render('error', templateVars);
