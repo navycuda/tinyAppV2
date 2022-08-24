@@ -275,10 +275,18 @@ app.post('/register', (request, response) => {
 
 // Error handling
 app.get('*', (request, response) => {
-  response.status(404).render('error');
+  const templateVars = {
+    user: null,
+    errorMsg: 'Url not found.'
+  };
+  response.status(404).render('error', templateVars);
 });
 app.post('*', (request, response) => {
-  response.status(404).render('error');
+  const templateVars = {
+    user: null,
+    errorMsg: 'Url not found.'
+  };
+  response.status(404).render('error', templateVars);
 });
 
 /**
