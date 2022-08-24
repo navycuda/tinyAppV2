@@ -171,7 +171,7 @@ app.put('/urls/:id', (request, response) => {
   }
   const updatedUrl = request.body.fullUrl;
   url.updateUrl(updatedUrl);
-  response.redirect('/urls');
+  response.redirect(`/urls/${id}`);
 });
 
 app.delete('/urls/:id/delete', (request, response) => {
