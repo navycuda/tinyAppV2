@@ -96,8 +96,9 @@ app.post('/urls', (request, response) => {
     return;
   }
   // Url adds itself to the database after construction
-  new Url(request.body.fullUrl, user.uid, dB.urls);
-  response.redirect('/urls');
+  new Url(request.body.fullUrl, user.uid, dB.urls, (id) => {
+    response.redirect(`/urls/${id}`);
+  });
 });
 
 
@@ -171,7 +172,7 @@ app.put('/urls/:id', (request, response) => {
   }
   const updatedUrl = request.body.fullUrl;
   url.updateUrl(updatedUrl);
-  response.redirect(`/urls/${id}`);
+  response.redirect(`/urls`);
 });
 
 app.delete('/urls/:id/delete', (request, response) => {

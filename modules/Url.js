@@ -8,7 +8,7 @@ class Url {
    * @param {string} uid The user id of the url owner
    * @param {object} database The database this url will live
    */
-  constructor(url, uid, database) {
+  constructor(url, uid, database, callback) {
     this.id = generateNewKey(6, database);
     this._url = url;
     this.owner = uid;
@@ -16,6 +16,7 @@ class Url {
     this.visitors = {};
     this.redirects = 0;
     database[this.id] = this;
+    callback(this.id);
   }
   /**
    * Tests to see if the user owns this url or not.
